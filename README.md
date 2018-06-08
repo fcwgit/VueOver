@@ -1,4 +1,8 @@
 # VueOver
+
+主要讲述实例事件
+
+
 1、引入jquery
 <script src="/assets/js/jquery-3.3.1.min.js"></script>
 2、只有在updated和mounted后才能使用jquery，否则jquery找不到dom
@@ -72,13 +76,38 @@ function tick(){
         }
 
 
+======================构造器之外添加事件=============================
 
+构造器外面新增事件
+<button onclick="reduce()">reduce</button>
 
+vm.$on('reduce',function(){
+            console.log('执行了Reduce方法');
+            this.num--;
+        })
 
+        function reduce(){
+            vm.$emit('reduce');
+        }
 
+只执行一次的方法
+<button onclick="reduceOnce()">reduceOnce</button>
 
+vm.$once('reduceOnce',function(){
+            console.log('只执行一次的方法');
+            this.num--;
+        })
 
+        function reduceOnce(){
+            vm.$emit('reduceOnce');
+        }
 
+注意：分为两步，第一步写入事件，第二步使用emit外面调用执行
 
+关闭某一个事件
+<button onclick="off()">off</button>
+function off(){
+            vm.$off('reduce');
+        }
 
 
