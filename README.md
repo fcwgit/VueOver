@@ -111,3 +111,56 @@ function off(){
         }
 
 
+
+======================slot=============================
+
+定义template
+<template id="tmp">
+        <div>
+            <p>博客地址：</p>
+            <p>网名：</p>
+            <p>技术类型：</p>
+        </div>
+        
+    </template>
+  var jspang = {
+            template:`#tmp`
+        }  
+
+var vm = new Vue({
+            el:'#app',
+            data:{
+                jspangData:{
+                    blogUrl:'http://jspang.com',
+                    netName:'jspang',
+                    skill:'web前端'
+                }
+            },
+            components:{
+                'jspang':jspang
+            }
+        })
+替换
+<div id="app">
+        <jspang></jspang>
+    </div>
+
+添加slot
+<jspang>
+            <span slot="blogUrl">{{jspangData.blogUrl}}</span>
+            <span slot="netName">{{jspangData.netName}}</span>
+            <span slot="skill">{{jspangData.skill}}</span>
+        </jspang>
+
+ <template id="tmp">
+        <div>
+            <p>博客地址：<slot name="blogUrl"></slot></p>
+            <p>网名：<slot name="netName"></slot></p>
+            <p>技术类型：<slot name="skill"></slot></p>
+        </div>
+        
+    </template>
+
+先在组件里面传递值，在模板里面获取
+
+
