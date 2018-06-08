@@ -25,19 +25,51 @@ mounted:function(){
 
         vm.add();
 
+======================mount=============================
+定义扩展
+var jsPang = Vue.extend({
+            template:`
+                <p>{{message}}</p>
+            `,
+            data:function(){
+                return {
+                    message:'hello i am jspang'
+                }
+            },
+            mounted:function(){
+                console.log("mounted 被创建了");
+            }
+        });
+挂载扩展
+        var vm = new jsPang().$mount("#app ");
+
+卸载
+<p><button onclick="destroy()">destroy</button></p>
+function destroy(){
+
+            vm.$destroy();
+        }
+
+强制更新
+<p><button onclick="forceUpdate()">forceUpdate</button></p>
 
 
+function forceUpdate(){
+            vm.$forceUpdate();
+        }
+function forceUpdate(){
+            vm.message = 'hhhhhhhhhhh';
+            vm.$forceUpdate();
+        }
 
-
-
-
-
-
-
-
-
-
-
+message被修改之后，钩子函数nextTick被调用
+<p><button onclick="tick()">tick</button></p>
+function tick(){
+            vm.message = 'update message info';
+            vm.$nextTick(function(){
+                console.log('message 更新之后我被调用了');
+            })
+        }
 
 
 
